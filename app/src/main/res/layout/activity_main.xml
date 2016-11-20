@@ -15,8 +15,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btRandom"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="171dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:onClick="chisteRandom" />
+
+    <Button
+        android:text="EN ORDEN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btOrden"
+        android:layout_marginBottom="24dp"
+        android:layout_above="@+id/btRandom"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="chisteOrden" />
 </RelativeLayout>

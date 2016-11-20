@@ -12,30 +12,59 @@ import java.util.ArrayList;
 public class ChisteActivity extends AppCompatActivity {
 
     private Button btOtro;
+    private Button btSalir;
     private TextView tvChiste;
     private String[] listaChistes = new String[13];
     private ArrayList<Integer> vistos = new ArrayList<>();
-    private int i;
+    private int i, tipo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chiste);
 
+        tvChiste = (TextView) findViewById(R.id.tvChiste);
+
+        Bundle extras = getIntent().getExtras();
+        tipo = extras.getInt("tipo");
+
         cargarChistes();
 
-        tvChiste = (TextView) findViewById(R.id.tvChiste);
+        btSalir = (Button) findViewById(R.id.btSalir);
+        btSalir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btOtro = (Button) findViewById(R.id.btOtro);
         btOtro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                do{i = (int) (Math.random()*13);}while(vistos.contains(i));
-                tvChiste.setText(listaChistes[i]+"\nChiste: "+i+"\nVistos: "+vistos.size());
-                vistos.add(i);
-                if(vistos.size()==listaChistes.length) vistos.clear();
+                mostrarChiste();
             }
         });
+
+        if(tipo!=0){
+            btOtro.setText("SIGUIENTE");
+        }
+
+        mostrarChiste();
+    }
+
+    public void mostrarChiste(){
+        if(tipo!=0){
+            tvChiste.setText(listaChistes[i]+"\nChiste: "+i);
+            i++;
+            if(i==listaChistes.length) i=0;
+        }else{
+            do{i = (int) (Math.random()*13);}while(vistos.contains(i));
+            tvChiste.setText(listaChistes[i]+"\nChiste: "+i);
+            vistos.add(i);
+            if(vistos.size()==listaChistes.length) vistos.clear();
+        }
     }
 
     public void cargarChistes(){
